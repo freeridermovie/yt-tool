@@ -1,0 +1,9 @@
+.venv/
+data/
+client_secret.json
+__pycache__/
+safari/build/
+dist/
+xcuserdata/
+*.xcuserstate
+.DS_Store

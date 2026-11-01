@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>チャンネル仕分け</title>
+<link rel="stylesheet" href="manager.css">
+</head>
+<body>
+<header>
+  <h1>✂ YouTube Tool</h1>
+  <span id="authStatus" class="muted"></span>
+  <span class="spacer"></span>
+  <span id="updatedAt" class="muted"></span>
+  <button id="refreshBtn" class="btn">🔄 登録チャンネルを取得</button>
+  <button id="loginBtn" class="btn primary">Googleでログイン</button>
+  <button id="logoutBtn" class="btn small" hidden>ログアウト</button>
+</header>
+
+<div class="layout">
+  <aside>
+    <div id="groupList"></div>
+    <form class="add-group" id="addGroupForm">
+      <input type="color" id="newGroupColor" value="#3ea6ff" title="色">
+      <input type="text" id="newGroupName" placeholder="新しいグループ名">
+      <button class="btn small" type="submit">追加</button>
+    </form>
+    <p class="muted">チャンネルカードをグループへドラッグしても仕分けできます。</p>
+    <details class="settings">
+      <summary>保存先フォルダ</summary>
+      <input type="text" id="outputDir">
+      <button class="btn small" id="saveOutputDir">保存</button>
+    </details>
+  </aside>
+
+  <main>
+    <div class="tabs">
+      <button class="btn active" data-tab="channels">チャンネル</button>
+      <button class="btn" data-tab="feed">新着動画</button>
+    </div>
+    <div id="notice"></div>
+
+    <section id="channelsView">
+      <div class="toolbar">
+        <input type="search" id="search" placeholder="チャンネル名で検索">
+        <button class="btn small" id="selectAll">表示中を全選択</button>
+      </div>
+      <div class="bulk" id="bulk">
+        <span id="bulkCount"></span>
+        <select id="bulkGroup"></select>
+        <button class="btn small" id="bulkAdd">に追加</button>
+        <button class="btn small" id="bulkRemove">から外す</button>
+        <button class="btn small" id="bulkClear">選択解除</button>
+      </div>
+      <div class="grid" id="channelGrid"></div>
+    </section>
+
+    <section id="feedView" hidden>
+      <div class="toolbar">
+        <label class="muted"><input type="checkbox" id="showShorts"> ショートも表示</label>
+        <button class="btn small" id="reloadFeed">再読み込み</button>
+      </div>
+      <div class="feed" id="feedGrid"></div>
+    </section>
+  </main>
+</div>
+
+<script src="api.js"></script>
+<script src="manager.js"></script>
+</body>
+</html>

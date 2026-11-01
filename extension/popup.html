@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="manager.css">
+<style>
+  body { width: 360px; padding: 12px; }
+  h1 { font-size: 15px; margin: 0 0 8px; }
+  .job { padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 12px; }
+  .job .t { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .job .m { color: var(--muted); display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+  #jobs { max-height: 320px; overflow-y: auto; margin: 8px 0; }
+</style>
+</head>
+<body>
+  <h1>✂ YouTube Tool</h1>
+  <div id="server" class="muted">接続確認中…</div>
+  <div id="jobs"></div>
+  <button id="open" class="btn primary" style="width:100%">📂 登録チャンネル仕分けを開く</button>
+  <script src="api.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

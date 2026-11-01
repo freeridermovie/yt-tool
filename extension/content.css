@@ -1,0 +1,128 @@
+/* YouTube のテーマ (html[dark]) に合わせて配色を切り替える */
+#ytt-panel {
+  --ytt-bg: #f2f2f2;
+  --ytt-text: #0f0f0f;
+  --ytt-muted: #606060;
+  --ytt-field: #fff;
+  --ytt-border: #ccc;
+  --ytt-btn: #e5e5e5;
+  --ytt-btn-hover: #d9d9d9;
+}
+html[dark] #ytt-panel {
+  --ytt-bg: #272727;
+  --ytt-text: #f1f1f1;
+  --ytt-muted: #aaa;
+  --ytt-field: #121212;
+  --ytt-border: #4d4d4d;
+  --ytt-btn: #3f3f3f;
+  --ytt-btn-hover: #535353;
+}
+
+#ytt-panel {
+  margin: 12px 0 4px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--ytt-bg);
+  color: var(--ytt-text);
+  font: 14px/1.4 "Roboto", "Hiragino Sans", sans-serif;
+}
+#ytt-panel .ytt-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 6px; }
+#ytt-panel .ytt-logo { font-weight: 700; margin-right: 6px; }
+#ytt-panel label { display: inline-flex; align-items: center; gap: 4px; color: var(--ytt-text); }
+#ytt-panel .ytt-time, #ytt-panel select {
+  width: 76px; padding: 5px 8px; border-radius: 6px;
+  border: 1px solid var(--ytt-border);
+  background: var(--ytt-field); color: var(--ytt-text); font: inherit;
+}
+#ytt-panel .ytt-time::placeholder { color: var(--ytt-muted); }
+#ytt-panel select { width: auto; }
+#ytt-panel .ytt-btn {
+  padding: 6px 12px; border-radius: 18px; border: none; cursor: pointer; font: inherit;
+  background: var(--ytt-btn); color: var(--ytt-text);
+}
+#ytt-panel .ytt-btn:hover { background: var(--ytt-btn-hover); }
+#ytt-panel .ytt-primary { background: #e62117; color: #fff; font-weight: 600; }
+#ytt-panel .ytt-primary:hover { background: #c81a12; }
+#ytt-panel .ytt-status { font-size: 13px; color: var(--ytt-muted); }
+#ytt-panel .ytt-status div { margin-top: 2px; word-break: break-all; }
+
+/* ---------- サイドバーのグループ ---------- */
+#ytt-guide {
+  --ytt-text: #0f0f0f; --ytt-muted: #606060; --ytt-hover: rgba(0, 0, 0, 0.05); --ytt-line: rgba(0, 0, 0, 0.1);
+  padding: 12px 0; border-bottom: 1px solid var(--ytt-line);
+  color: var(--ytt-text); font: 14px/1.4 "Roboto", "Hiragino Sans", sans-serif;
+}
+html[dark] #ytt-guide {
+  --ytt-text: #f1f1f1; --ytt-muted: #aaa; --ytt-hover: rgba(255, 255, 255, 0.1); --ytt-line: rgba(255, 255, 255, 0.2);
+}
+#ytt-guide .ytt-g-title {
+  display: flex; align-items: center; gap: 4px; padding: 6px 12px 4px 24px; font-size: 16px; font-weight: 600;
+}
+#ytt-guide .ytt-g-title span { flex: 1; }
+#ytt-guide button { font: inherit; color: inherit; border: none; background: none; cursor: pointer; }
+#ytt-guide .ytt-g-icon { width: 32px; height: 32px; border-radius: 50%; color: var(--ytt-muted); display: inline-flex; align-items: center; justify-content: center; }
+#ytt-guide .ytt-g-icon:hover { background: var(--ytt-hover); color: var(--ytt-text); }
+#ytt-guide .ytt-g-item {
+  display: flex; align-items: center; gap: 14px; height: 40px; padding: 0 12px 0 24px; margin: 0 12px 0 0;
+  border-radius: 10px; color: inherit; text-decoration: none; cursor: pointer; min-width: 0;
+}
+#ytt-guide .ytt-g-item:hover { background: var(--ytt-hover); }
+#ytt-guide .ytt-g-head { gap: 10px; }
+#ytt-guide .ytt-g-chev { width: 12px; color: var(--ytt-muted); transition: transform 0.15s; font-size: 18px; text-align: center; }
+#ytt-guide .open > .ytt-g-head .ytt-g-chev { transform: rotate(90deg); }
+#ytt-guide .ytt-g-dot { width: 12px; height: 12px; border-radius: 50%; flex: none; }
+#ytt-guide .ytt-g-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#ytt-guide .ytt-g-count { color: var(--ytt-muted); font-size: 12px; }
+#ytt-guide .ytt-g-feed {
+  display: none; padding: 2px 8px; border-radius: 10px; font-size: 12px; background: var(--ytt-hover);
+}
+#ytt-guide .ytt-g-head:hover .ytt-g-feed { display: inline-block; }
+#ytt-guide .ytt-g-head:hover .ytt-g-count { display: none; }
+#ytt-guide .ytt-g-list { display: none; }
+#ytt-guide .open > .ytt-g-list { display: block; }
+#ytt-guide .ytt-g-ch { padding-left: 46px; height: 36px; }
+#ytt-guide .ytt-g-avatar { width: 24px; height: 24px; border-radius: 50%; flex: none; background: var(--ytt-hover); }
+#ytt-guide .ytt-g-note { padding: 6px 24px; font-size: 12px; color: var(--ytt-muted); }
+#ytt-guide .ytt-g-title { padding-right: 8px; }
+#ytt-guide .ytt-g-title .ytt-g-icon { width: 30px; height: 30px; }
+#ytt-guide .ytt-g-input {
+  flex: 1; min-width: 0; padding: 4px 8px; border-radius: 6px; border: 1px solid #3ea6ff; outline: none;
+  background: transparent; color: var(--ytt-text); font: inherit;
+}
+#ytt-guide .ytt-g-editrow { gap: 10px; padding-left: 46px; }
+#ytt-guide .ytt-g-action {
+  display: block; margin: 6px 24px; padding: 7px 14px; border-radius: 18px;
+  background: #3ea6ff; color: #0f0f0f; font-weight: 600; font-size: 13px;
+}
+#ytt-guide .ytt-g-action:hover { filter: brightness(1.1); }
+#ytt-guide .ytt-drop { outline: 2px dashed #3ea6ff; outline-offset: -2px; }
+
+/* ---------- 右クリックメニュー ---------- */
+#ytt-menu {
+  --ytt-text: #0f0f0f; --ytt-muted: #606060; --ytt-hover: rgba(0, 0, 0, 0.06); --ytt-bg: #fff; --ytt-line: rgba(0, 0, 0, 0.1);
+  position: fixed; z-index: 99999; min-width: 220px; max-width: 300px; padding: 6px 0; border-radius: 12px;
+  background: var(--ytt-bg); color: var(--ytt-text); box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+  font: 14px/1.4 "Roboto", "Hiragino Sans", sans-serif;
+}
+html[dark] #ytt-menu {
+  --ytt-text: #f1f1f1; --ytt-muted: #aaa; --ytt-hover: rgba(255, 255, 255, 0.1); --ytt-bg: #282828; --ytt-line: rgba(255, 255, 255, 0.15);
+}
+#ytt-menu .ytt-m-title { padding: 6px 16px 2px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#ytt-menu .ytt-m-sub { padding: 0 16px 6px; font-size: 12px; color: var(--ytt-muted); }
+#ytt-menu .ytt-m-item {
+  display: flex; align-items: center; gap: 10px; width: 100%; padding: 8px 16px; border: none; background: none;
+  color: inherit; font: inherit; text-align: left; cursor: pointer;
+}
+#ytt-menu .ytt-m-item:hover { background: var(--ytt-hover); }
+#ytt-menu .ytt-m-item.danger { color: #ff4e45; }
+#ytt-menu .ytt-m-check { width: 14px; color: #3ea6ff; font-weight: 700; }
+#ytt-menu .ytt-g-dot { width: 12px; height: 12px; border-radius: 50%; flex: none; }
+#ytt-menu .ytt-m-sep { height: 1px; margin: 6px 0; background: var(--ytt-line); }
+#ytt-menu .ytt-m-editrow { padding: 6px 16px; }
+#ytt-menu .ytt-g-input {
+  width: 100%; padding: 6px 8px; border-radius: 6px; border: 1px solid #3ea6ff; outline: none;
+  background: transparent; color: var(--ytt-text); font: inherit; box-sizing: border-box;
+}
+#ytt-menu .ytt-m-colors { display: flex; gap: 6px; padding: 6px 16px; }
+#ytt-menu .ytt-m-swatch { width: 20px; height: 20px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; padding: 0; }
+#ytt-menu .ytt-m-swatch.on { border-color: var(--ytt-text); }

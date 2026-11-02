@@ -1,50 +1,111 @@
-/* YouTube のテーマ (html[dark]) に合わせて配色を切り替える */
+/* ---------- 動画の下の保存パネル（YouTube のテーマ html[dark] に合わせる） ---------- */
 #ytt-panel {
-  --ytt-bg: #f2f2f2;
+  --ytt-bg: rgba(0, 0, 0, 0.04);
   --ytt-text: #0f0f0f;
   --ytt-muted: #606060;
   --ytt-field: #fff;
-  --ytt-border: #ccc;
-  --ytt-btn: #e5e5e5;
-  --ytt-btn-hover: #d9d9d9;
+  --ytt-border: rgba(0, 0, 0, 0.12);
+  --ytt-tonal: rgba(0, 0, 0, 0.06);
+  --ytt-tonal-hover: rgba(0, 0, 0, 0.1);
+  --ytt-primary: #0f0f0f;
+  --ytt-on-primary: #fff;
+  --ytt-accent: #ff0033;
 }
 html[dark] #ytt-panel {
-  --ytt-bg: #272727;
+  --ytt-bg: rgba(255, 255, 255, 0.06);
   --ytt-text: #f1f1f1;
   --ytt-muted: #aaa;
-  --ytt-field: #121212;
-  --ytt-border: #4d4d4d;
-  --ytt-btn: #3f3f3f;
-  --ytt-btn-hover: #535353;
+  --ytt-field: rgba(0, 0, 0, 0.35);
+  --ytt-border: rgba(255, 255, 255, 0.14);
+  --ytt-tonal: rgba(255, 255, 255, 0.1);
+  --ytt-tonal-hover: rgba(255, 255, 255, 0.18);
+  --ytt-primary: #f1f1f1;
+  --ytt-on-primary: #0f0f0f;
 }
 
 #ytt-panel {
-  margin: 12px 0 4px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: var(--ytt-bg);
-  color: var(--ytt-text);
-  font: 14px/1.4 "Roboto", "Hiragino Sans", sans-serif;
+  margin: 12px 0 4px; padding: 8px; border-radius: 14px;
+  background: var(--ytt-bg); color: var(--ytt-text);
+  font: 500 14px/1.4 "Roboto", "Hiragino Sans", sans-serif;
 }
-#ytt-panel .ytt-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 6px; }
-#ytt-panel .ytt-logo { font-weight: 700; margin-right: 6px; }
-#ytt-panel label { display: inline-flex; align-items: center; gap: 4px; color: var(--ytt-text); }
-#ytt-panel .ytt-time, #ytt-panel select {
-  width: 76px; padding: 5px 8px; border-radius: 6px;
-  border: 1px solid var(--ytt-border);
-  background: var(--ytt-field); color: var(--ytt-text); font: inherit;
+#ytt-panel svg { flex: none; }
+#ytt-panel button { font: inherit; color: inherit; cursor: pointer; }
+#ytt-panel .ytt-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+#ytt-panel .ytt-logo {
+  display: inline-flex; align-items: center; gap: 6px; padding: 0 6px 0 4px;
+  font-weight: 700; letter-spacing: 0.01em;
 }
-#ytt-panel .ytt-time::placeholder { color: var(--ytt-muted); }
-#ytt-panel select { width: auto; }
-#ytt-panel .ytt-btn {
-  padding: 6px 12px; border-radius: 18px; border: none; cursor: pointer; font: inherit;
-  background: var(--ytt-btn); color: var(--ytt-text);
+#ytt-panel .ytt-logo svg { color: var(--ytt-accent); }
+#ytt-panel .ytt-spacer { flex: 1; }
+
+/* 保存ボタン + 形式の選択を1つのピルにまとめる */
+#ytt-panel .ytt-split {
+  display: inline-flex; align-items: stretch; height: 36px; border-radius: 18px; overflow: hidden;
+  background: var(--ytt-tonal);
 }
-#ytt-panel .ytt-btn:hover { background: var(--ytt-btn-hover); }
-#ytt-panel .ytt-primary { background: #e62117; color: #fff; font-weight: 600; }
-#ytt-panel .ytt-primary:hover { background: #c81a12; }
-#ytt-panel .ytt-status { font-size: 13px; color: var(--ytt-muted); }
-#ytt-panel .ytt-status div { margin-top: 2px; word-break: break-all; }
+#ytt-panel .ytt-split-primary { background: var(--ytt-primary); color: var(--ytt-on-primary); }
+#ytt-panel .ytt-save {
+  display: inline-flex; align-items: center; gap: 7px; padding: 0 12px 0 14px; border: none; background: none;
+}
+#ytt-panel .ytt-split select {
+  appearance: none; -webkit-appearance: none; border: none; outline: none; cursor: pointer;
+  padding: 0 26px 0 10px; margin: 0; color: inherit; font: inherit; font-size: 13px;
+  border-left: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+  background: transparent url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="gray" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>') no-repeat right 8px center;
+}
+#ytt-panel .ytt-split select option { color: #0f0f0f; }
+#ytt-panel .ytt-split:hover { filter: brightness(0.94); }
+html[dark] #ytt-panel .ytt-split:hover { filter: brightness(1.15); }
+
+/* 区間指定 */
+#ytt-panel .ytt-range-toggle, #ytt-panel .ytt-ghost {
+  display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 14px; border-radius: 18px;
+  border: 1px solid var(--ytt-border); background: none;
+}
+#ytt-panel .ytt-range-toggle:hover, #ytt-panel .ytt-ghost:hover { background: var(--ytt-tonal); }
+#ytt-panel .ytt-range-toggle[aria-expanded="true"] { background: var(--ytt-tonal); border-color: transparent; }
+#ytt-panel .ytt-range {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 8px; padding: 8px;
+  border-radius: 10px; background: var(--ytt-tonal); animation: ytt-open 0.16s ease-out;
+}
+#ytt-panel .ytt-range[hidden] { display: none; }
+@keyframes ytt-open { from { opacity: 0; transform: translateY(-4px); } }
+#ytt-panel .ytt-field {
+  display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 4px 0 12px; border-radius: 17px;
+  background: var(--ytt-field); border: 1px solid var(--ytt-border);
+}
+#ytt-panel .ytt-field > span { font-size: 12px; color: var(--ytt-muted); }
+#ytt-panel .ytt-time {
+  width: 72px; border: none; outline: none; background: none; color: var(--ytt-text);
+  font: 500 14px/1 "Roboto Mono", ui-monospace, "SF Mono", monospace;
+}
+#ytt-panel .ytt-time::placeholder { color: var(--ytt-muted); font-family: "Roboto", "Hiragino Sans", sans-serif; }
+#ytt-panel .ytt-now {
+  display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px;
+  border: none; border-radius: 50%; background: none; color: var(--ytt-muted);
+}
+#ytt-panel .ytt-now:hover { background: var(--ytt-tonal); color: var(--ytt-text); }
+#ytt-panel .ytt-arrow { color: var(--ytt-muted); }
+#ytt-panel .ytt-range .ytt-ghost { height: 34px; }
+#ytt-panel .ytt-range-len { font-size: 12px; color: var(--ytt-muted); }
+
+/* 保存の進み具合 */
+#ytt-panel .ytt-jobs:empty { display: none; }
+#ytt-panel .ytt-jobs { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+#ytt-panel .ytt-job {
+  display: flex; align-items: center; gap: 10px; padding: 6px 6px 6px 12px; border-radius: 10px;
+  background: var(--ytt-tonal); font-size: 13px;
+}
+#ytt-panel .ytt-job-icon { display: inline-flex; color: var(--ytt-muted); }
+#ytt-panel .ytt-job-main { flex: 1; min-width: 0; }
+#ytt-panel .ytt-job-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#ytt-panel .ytt-job-bar { height: 3px; margin-top: 5px; border-radius: 2px; background: var(--ytt-border); overflow: hidden; }
+#ytt-panel .ytt-job-bar i { display: block; height: 100%; width: 0; background: var(--ytt-accent); transition: width 0.4s; }
+#ytt-panel .ytt-job.done .ytt-job-bar, #ytt-panel .ytt-job.error .ytt-job-bar { display: none; }
+#ytt-panel .ytt-job.done .ytt-job-icon { color: #2ba640; }
+#ytt-panel .ytt-job.error { color: #e53935; }
+#ytt-panel .ytt-job-state { font-size: 12px; color: var(--ytt-muted); white-space: nowrap; }
+#ytt-panel .ytt-job-state .ytt-ghost { height: 30px; padding: 0 12px; font-size: 12px; color: var(--ytt-text); }
 
 /* ---------- サイドバーのグループ ---------- */
 #ytt-guide {

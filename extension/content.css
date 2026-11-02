@@ -126,3 +126,30 @@ html[dark] #ytt-menu {
 #ytt-menu .ytt-m-colors { display: flex; gap: 6px; padding: 6px 16px; }
 #ytt-menu .ytt-m-swatch { width: 20px; height: 20px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; padding: 0; }
 #ytt-menu .ytt-m-swatch.on { border-color: var(--ytt-text); }
+
+/* ---------- 動画上に流れるコメント ---------- */
+#ytt-danmaku {
+  position: absolute; inset: 0; z-index: 25; overflow: hidden; pointer-events: none;
+}
+#ytt-danmaku .ytt-dm {
+  position: absolute; left: 0; white-space: nowrap; will-change: transform;
+  color: #fff; font-weight: 700; line-height: 1.2; font-family: "Hiragino Sans", "Roboto", sans-serif;
+  text-shadow: 0 0 3px #000, 1px 1px 2px #000, -1px -1px 2px #000;
+}
+#ytt-danmaku .ytt-dm.paid { color: #ffd600; }
+#ytt-danmaku .ytt-dm img { height: 1em; width: auto; vertical-align: -0.1em; }
+#ytt-danmaku .ytt-dm-toast {
+  position: absolute; left: 12px; top: 12px; padding: 4px 10px; border-radius: 6px;
+  background: rgba(0, 0, 0, 0.6); color: #fff; font: 13px/1.4 "Hiragino Sans", "Roboto", sans-serif;
+  transition: opacity 0.4s;
+}
+#ytt-danmaku .ytt-dm-toast.hide { opacity: 0; }
+#ytt-dm-btn {
+  display: inline-flex !important; align-items: center; justify-content: center; vertical-align: top;
+  width: auto !important; padding: 0 6px !important;
+}
+#ytt-dm-btn .ytt-dm-icon {
+  padding: 2px 6px; border: 2px solid currentColor; border-radius: 6px; white-space: nowrap;
+  font: 700 12px/1.2 "Roboto", "Hiragino Sans", sans-serif; opacity: 0.6;
+}
+#ytt-dm-btn[aria-pressed="true"] .ytt-dm-icon { opacity: 1; background: #fff; color: #000; border-color: #fff; }

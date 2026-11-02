@@ -72,6 +72,7 @@
             { "path": "../../../extension/manifest.json", "target-membership": [ "YouTube Tool Extension/resources" ] },
             { "path": "../../../extension/content.js", "target-membership": [ "YouTube Tool Extension/resources" ] },
             { "path": "../../../extension/guide.js", "target-membership": [ "YouTube Tool Extension/resources" ] },
+            { "path": "../../../extension/danmaku.js", "target-membership": [ "YouTube Tool Extension/resources" ] },
             { "path": "../../../extension/api.js", "target-membership": [ "YouTube Tool Extension/resources" ] },
             { "path": "../../../extension/manager.css", "target-membership": [ "YouTube Tool Extension/resources" ] },
           ],

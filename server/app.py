@@ -267,6 +267,53 @@ def reveal(job_id: str):
     return {"ok": True}
 
 
+# ---------- 動画上に流すコメント（時間つきコメント） ----------
+
+TIME_RE = re.compile(r"(?<![\d:])(?:(\d{1,2}):)?(\d{1,2}):([0-5]\d)(?![\d:])")
+comments_cache: dict[str, dict] = {}
+
+
+def timed_segments(text: str, duration: float | None) -> list[dict]:
+    """「1:23 ここ好き」のようなコメントを、時刻ごとの {t, text} に分ける"""
+    ms = list(TIME_RE.finditer(text))
+    if not ms or len(ms) > 3:  # 時刻が多いものは目次・セトリなので流さない
+        return []
+    out = []
+    for i, m in enumerate(ms):
+        if len(ms) == 1 and (text[:m.start()].strip() or text[m.end():m.end() + 1] not in ("", " ", "\n", "　")):
+            seg = text  # 「…2:05のところ…」のように文中にある時刻はそのまま見せる
+        else:
+            end = ms[i + 1].start() if i + 1 < len(ms) else len(text)
+            seg = text[m.end():end].strip(" \n-~〜:：・") or TIME_RE.sub("", text).strip()
+        t = int(m.group(1) or 0) * 3600 + int(m.group(2)) * 60 + int(m.group(3))
+        if seg and (not duration or t <= duration):
+            out.append({"t": t, "text": " ".join(seg.split())[:80]})
+    return out
+
+
+@app.get("/api/comments")
+def timed_comments(v: str):
+    if not re.fullmatch(r"[\w-]{11}", v):
+        raise HTTPException(400, "動画IDが不正です")
+    if v in comments_cache:
+        return comments_cache[v]
+    opts = {
+        "quiet": True, "no_warnings": True, "skip_download": True, "getcomments": True,
+        "extractor_args": {"youtube": {"max_comments": ["500", "all", "0", "0"], "comment_sort": ["top"]}},
+    }
+    try:
+        with yt_dlp.YoutubeDL(opts) as ydl:
+            info = ydl.extract_info(f"https://www.youtube.com/watch?v={v}", download=False)
+    except Exception as e:  # noqa: BLE001
+        raise HTTPException(502, re.sub(r"\x1b\[[0-9;]*m", "", str(e))) from e
+    items = [seg for c in info.get("comments") or [] for seg in timed_segments(c.get("text", ""), info.get("duration"))]
+    items.sort(key=lambda x: x["t"])
+    if len(comments_cache) > 30:
+        comments_cache.pop(next(iter(comments_cache)))
+    comments_cache[v] = {"total": len(info.get("comments") or []), "comments": items}
+    return comments_cache[v]
+
+
 # ---------- 認証 (YouTube Data API) ----------
 
 def load_credentials():
